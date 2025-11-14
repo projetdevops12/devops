@@ -1,0 +1,55 @@
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #f9f9f9;
+}
+
+header {
+  background: #282c34;
+  padding: 1rem;
+  color: white;
+  text-align: center;
+}
+
+.navbar {
+  display: flex;
+  gap: 1rem;
+  background: #444;
+  padding: 0.5rem;
+}
+
+.navbar a {
+  color: white;
+  text-decoration: none;
+}
+
+.navbar a:hover {
+  text-decoration: underline;
+}
+
+.page {
+  padding: 2rem;
+}
+
+html, body, #root {
+  height: 100%;
+  margin: 0;
+}
+
+.app-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+}
+
+.content {
+  flex: 1; /* prend tout l’espace disponible */
+  padding: 2rem;
+}
+
+.footer {
+  background: #eee;
+  padding: 1rem;
+  text-align: center;
+  margin-top: auto; /* pousse le footer en bas */
+}
