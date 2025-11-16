@@ -2,11 +2,13 @@
   "name": "my-fullstack-app",
   "private": true,
   "version": "1.0.0",
+  "type": "module",
   "scripts": {
-    "client": "cd client && npm run dev",
-    "server": "cd server && npm run dev",
+    "client": "npm --prefix client run dev",
+    "server": "npm --prefix server run dev",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
-    "build": "cd client && npm run build && cd ../server && npm run build"
+    "build": "npm --prefix client run build",
+    "start": "npm --prefix server run start"
   },
   "devDependencies": {
     "concurrently": "^8.2.2",
