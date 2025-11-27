@@ -12,6 +12,7 @@ function App() {
             <nav className="navbar">
                 <Link to="/">Accueil</Link>
                 <Link to="/about">À propos</Link>
+                <Link to="/">Infos</Link>
             </nav>
             <Routes>
                 <Route path="/" element={<Counter />} />
