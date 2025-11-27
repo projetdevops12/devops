@@ -20,10 +20,10 @@ app.get("/api/about", (req, res) => {
 
 
 const __dirname = path.resolve();
-app.use(express.static(path.join(__dirname, "../../client/dist")));
-
+app.use(express.static(path.join(__dirname, "../client/dist")));
+console.log(__dirname);
 app.get("*", (req, res) => {
-    res.sendFile(path.join(__dirname, "../../client/dist/index.html"));
+    res.sendFile(path.join(__dirname, "../client/dist/index.html"));
 });
 
 
