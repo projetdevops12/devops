@@ -17,5 +17,5 @@
   "workspaces": [
     "client",
     "server"
-  ]
+    ]
 }

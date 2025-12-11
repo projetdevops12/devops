@@ -1,0 +1,37 @@
+name: CI/CD Deploy
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - name: Install dependencies
+        run: |
+          npm install
+          npm install --prefix server
+
+      - name: Build frontend
+        run: npm run build
+
+      - name: Configure SSH
+        run: |
+          mkdir -p ~/.ssh
+          printf '%s\n' "${{ secrets.ANSIBLE_SSH_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan -H 217.182.66.173 >> ~/.ssh/known_hosts
+
+      - name: Deploy with Ansible
+        run: ansible-playbook -i ansible/inventory.ini ansible/deploy.yml -e "frontend_build_src=${{ github.workspace }}/client/dist"

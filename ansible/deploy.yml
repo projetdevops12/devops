@@ -1,0 +1,47 @@
+---
+- name: Déploiement fullstack monorepo
+  hosts: prod
+  become: yes
+  vars:
+    frontend_src: "{{ frontend_build_src | default('client/dist') }}"
+    backend_src: "server/"
+
+  tasks:
+
+    - name: Nettoyer l'ancien frontend
+      file:
+        path: /var/www/devops/client/
+        state: absent
+
+    - name: Recréer le dossier frontend
+      file:
+        path: /var/www/devops/client/
+        state: directory
+        owner: www-data
+        group: www-data
+        mode: '0755'
+
+    - name: Copier le build frontend
+      copy:
+        src: "{{ frontend_src }}/"
+        dest: /var/www/devops/client/
+        owner: www-data
+        group: www-data
+        mode: '0755'
+
+    - name: Copier le backend Node.js
+      copy:
+        src: "{{ backend_src }}/"
+        dest: /var/www/devops/server/
+        owner: www-data
+        group: www-data
+        mode: '0755'
+
+    - name: Installer les dépendances backend
+      command: npm install
+      args:
+        chdir: /var/www/devops/server/
+
+    - name: Redémarrer le backend avec PM2
+      command: pm2 restart app
+      ignore_errors: yes
