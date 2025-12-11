@@ -36,11 +36,11 @@ jobs:
         with:
           ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
 
-      # 6️⃣ Ajouter l’hôte distant dans known_hosts (avec ton port SSH)
+      # 6️⃣ Ajouter l’hôte distant dans known_hosts (⚠️ adapte <PORT>)
       - name: Add known hosts
         run: ssh-keyscan -p 14104 -H 217.182.66.173 >> ~/.ssh/known_hosts || true
 
-      # 7️⃣ Tester la connexion SSH (remplace <PORT> et l’utilisateur si besoin)
+      # 7️⃣ Tester la connexion SSH (⚠️ adapte <PORT> et utilisateur)
       - name: Test SSH connection
         run: ssh -p 14104 debian@217.182.66.173 "echo ✅ Connexion SSH OK"
 
@@ -50,8 +50,8 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y ansible
 
-      # 9️⃣ Déployer avec Ansible
+      # 9️⃣ Déployer avec Ansible (⚠️ passe le chemin complet du repo)
       - name: Deploy with Ansible
         run: |
           ansible-playbook -i ansible/inventory.ini ansible/deploy.yml \
-            -e "frontend_build_src=${{ github.workspace }}/client/dist"
+            -e "repo_src=${{ github.workspace }}"

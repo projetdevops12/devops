@@ -3,36 +3,27 @@
   hosts: prod
   become: yes
   vars:
-    frontend_src: "{{ frontend_build_src | default('client/dist') }}"
-    backend_src: "server/"
+    repo_src: "{{ repo_src | default(github_workspace) }}"
 
   tasks:
 
-    - name: Nettoyer l'ancien frontend
+    - name: Nettoyer l'ancien projet
       file:
-        path: /var/www/devops/client/
+        path: /var/www/devops/
         state: absent
 
-    - name: Recréer le dossier frontend
+    - name: Recréer le dossier projet
       file:
-        path: /var/www/devops/client/
+        path: /var/www/devops/
         state: directory
         owner: www-data
         group: www-data
         mode: '0755'
 
-    - name: Copier le build frontend
+    - name: Copier tout le repo
       copy:
-        src: "{{ frontend_src }}/"
-        dest: /var/www/devops/client/
-        owner: www-data
-        group: www-data
-        mode: '0755'
-
-    - name: Copier le backend Node.js
-      copy:
-        src: "{{ backend_src }}/"
-        dest: /var/www/devops/server/
+        src: "{{ repo_src }}/"
+        dest: /var/www/devops/
         owner: www-data
         group: www-data
         mode: '0755'
@@ -43,5 +34,5 @@
         chdir: /var/www/devops/server/
 
     - name: Redémarrer le backend avec PM2
-      command: pm2 restart app
+      command: pm2 restart projetdevops
       ignore_errors: yes
