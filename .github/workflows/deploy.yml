@@ -12,11 +12,11 @@ jobs:
     steps:
       # 1️⃣ Récupération du code
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       # 2️⃣ Installer Node.js
       - name: Setup Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: 18
 
@@ -34,12 +34,17 @@ jobs:
       - name: Configure SSH
         run: |
           mkdir -p $HOME/.ssh
-          echo "${{ secrets.ANSIBLE_SSH_KEY }}" > $HOME/.ssh/id_rsa
-          chmod 600 $HOME/.ssh/id_rsa
+          echo "${{ secrets.ANSIBLE_SSH_KEY }}" > $HOME/.ssh/id_ed25519
+          chmod 600 $HOME/.ssh/id_ed25519
           ssh-keyscan -H 217.182.66.173 >> $HOME/.ssh/known_hosts
-          ls -la $HOME/.ssh
 
-      # 6️⃣ Déployer avec Ansible
+      # 6️⃣ Installer Ansible
+      - name: Install Ansible
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ansible
+
+      # 7️⃣ Déployer avec Ansible
       - name: Deploy with Ansible
         run: |
           ansible-playbook -i ansible/inventory.ini ansible/deploy.yml \
