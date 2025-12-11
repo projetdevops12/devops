@@ -3,7 +3,7 @@ name: CI/CD Deploy
 on:
   push:
     branches:
-      - main
+      - main   # déclenche le workflow à chaque push sur main
 
 jobs:
   deploy:
@@ -30,21 +30,15 @@ jobs:
       - name: Build frontend
         run: npm run build
 
-      # 5️⃣ Configurer SSH
-      - name: Configure SSH
-        run: |
-          mkdir -p $HOME/.ssh
-          cat > $HOME/.ssh/id_ed25519 << 'EOF'
-          ${{ secrets.SSH_PRIVATE_KEY }}
-          EOF
-          chmod 600 $HOME/.ssh/id_ed25519
-          ssh-keyscan -H 217.182.66.173 >> $HOME/.ssh/known_hosts
+      # 5️⃣ Démarrer ssh-agent et charger la clé privée
+      - name: Start ssh-agent
+        uses: webfactory/ssh-agent@v0.7.0
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
 
-      # 6️⃣ Debug SSH key
-      - name: Debug SSH key
-        run: |
-          ls -l $HOME/.ssh
-          head -n 5 $HOME/.ssh/id_ed25519
+      # 6️⃣ Ajouter l’hôte distant dans known_hosts
+      - name: Add known hosts
+        run: ssh-keyscan -H 217.182.66.173 >> ~/.ssh/known_hosts
 
       # 7️⃣ Installer Ansible
       - name: Install Ansible
