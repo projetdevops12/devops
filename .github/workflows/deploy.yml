@@ -3,7 +3,7 @@ name: CI/CD Deploy
 on:
   push:
     branches:
-      - main   # déclenche le workflow à chaque push sur main
+      - main
 
 jobs:
   deploy:
@@ -30,21 +30,29 @@ jobs:
       - name: Build frontend
         run: npm run build
 
-      # 5️⃣ Configurer SSH pour Ansible
+      # 5️⃣ Configurer SSH
       - name: Configure SSH
         run: |
           mkdir -p $HOME/.ssh
-          echo "${{ secrets.SSH_PRIVATE_KEY }}" > $HOME/.ssh/id_ed25519
+          cat > $HOME/.ssh/id_ed25519 << 'EOF'
+          ${{ secrets.SSH_PRIVATE_KEY }}
+          EOF
           chmod 600 $HOME/.ssh/id_ed25519
           ssh-keyscan -H 217.182.66.173 >> $HOME/.ssh/known_hosts
 
-      # 6️⃣ Installer Ansible
+      # 6️⃣ Debug SSH key
+      - name: Debug SSH key
+        run: |
+          ls -l $HOME/.ssh
+          head -n 5 $HOME/.ssh/id_ed25519
+
+      # 7️⃣ Installer Ansible
       - name: Install Ansible
         run: |
           sudo apt-get update
           sudo apt-get install -y ansible
 
-      # 7️⃣ Déployer avec Ansible
+      # 8️⃣ Déployer avec Ansible
       - name: Deploy with Ansible
         run: |
           ansible-playbook -i ansible/inventory.ini ansible/deploy.yml \
