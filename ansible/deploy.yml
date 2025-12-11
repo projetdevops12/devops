@@ -39,5 +39,5 @@
         chdir: /var/www/devops/server/
 
     - name: Redémarrer le backend avec PM2
-      command: pm2 restart app
+      command: pm2 restart projetdevops
       ignore_errors: yes
