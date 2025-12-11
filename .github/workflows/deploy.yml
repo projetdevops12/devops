@@ -36,13 +36,13 @@ jobs:
         with:
           ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
 
-      # 6️⃣ Ajouter l’hôte distant dans known_hosts
+      # 6️⃣ Ajouter l’hôte distant dans known_hosts (avec ton port SSH)
       - name: Add known hosts
-        run: ssh-keyscan -H 217.182.66.173 >> ~/.ssh/known_hosts
+        run: ssh-keyscan -p 14104 -H 217.182.66.173 >> ~/.ssh/known_hosts || true
 
-      # 7️⃣ Tester la connexion SSH
+      # 7️⃣ Tester la connexion SSH (remplace <PORT> et l’utilisateur si besoin)
       - name: Test SSH connection
-        run: ssh -v debian@217.182.66.173 "echo ✅ Connexion SSH OK"
+        run: ssh -p 14104 debian@217.182.66.173 "echo ✅ Connexion SSH OK"
 
       # 8️⃣ Installer Ansible
       - name: Install Ansible
