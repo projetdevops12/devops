@@ -5,6 +5,10 @@ on:
     branches:
       - main   # déclenche le workflow à chaque push sur main
 
+concurrency:
+  group: deploy-prod
+  cancel-in-progress: true   # annule un déploiement en cours si un nouveau push arrive
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -44,13 +48,13 @@ jobs:
       - name: Test SSH connection
         run: ssh -p 14104 debian@217.182.66.173 "echo ✅ Connexion SSH OK"
 
-      # 8️⃣ Installer Ansible
+      # 8️⃣ Installer Ansible sur le runner (pas sur le VPS)
       - name: Install Ansible
         run: |
           sudo apt-get update
-          sudo apt-get install -y ansible
+          sudo apt-get install -y ansible rsync
 
-      # 9️⃣ Déployer avec Ansible (⚠️ passe le chemin complet du repo)
+      # 9️⃣ Déployer avec Ansible
       - name: Deploy with Ansible
         run: |
           ansible-playbook -i ansible/inventory.ini ansible/deploy.yml \

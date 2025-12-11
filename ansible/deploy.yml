@@ -20,13 +20,18 @@
         group: www-data
         mode: '0755'
 
-    - name: Copier tout le repo
-      copy:
+    - name: Synchroniser le repo (sans fichiers lourds)
+      synchronize:
         src: "{{ repo_src }}/"
         dest: /var/www/devops/
-        owner: www-data
-        group: www-data
-        mode: '0755'
+        rsync_opts:
+          - "--exclude=node_modules"
+          - "--exclude=.git"
+          - "--exclude=.github"
+          - "--exclude=*.log"
+          - "--exclude=tmp"
+        recursive: yes
+        delete: yes
 
     - name: Installer les dépendances backend
       command: npm install
@@ -34,5 +39,5 @@
         chdir: /var/www/devops/server/
 
     - name: Redémarrer le backend avec PM2
-      command: pm2 restart projetdevops
+      command: pm2 restart app
       ignore_errors: yes
