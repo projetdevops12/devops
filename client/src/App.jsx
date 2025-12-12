@@ -13,6 +13,7 @@ function App() {
                 <Link to="/">Accueil</Link>
                 <Link to="/about">À propos</Link>
                 <Link to="/">Infos</Link>
+                <Link to="/about">Contact</Link>
             </nav>
             <Routes>
                 <Route path="/" element={<Counter />} />
