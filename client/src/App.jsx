@@ -14,6 +14,7 @@ function App() {
                 <Link to="/about">À propos</Link>
                 <Link to="/">Infos</Link>
                 <Link to="/about">Contact</Link>
+                <Link to="/about">Présentation</Link>
             </nav>
             <Routes>
                 <Route path="/" element={<Counter />} />
