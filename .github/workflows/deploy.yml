@@ -32,11 +32,6 @@ jobs:
       - name: Build frontend
         run: npm run build
 
-      # 5️⃣ Installer Ansible sur le runner (VM Debian)
-      - name: Install Ansible
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y ansible rsync
 
       # 6️⃣ Déployer avec Ansible (sur la même VM)
       - name: Deploy with Ansible
