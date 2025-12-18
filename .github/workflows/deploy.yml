@@ -6,12 +6,12 @@ on:
       - main   # déclenche le workflow à chaque push sur main
 
 concurrency:
-  group: deploy-prod
+  group: deploy-local
   cancel-in-progress: true   # annule un déploiement en cours si un nouveau push arrive
 
 jobs:
   deploy:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted   # ⚠️ utilise ton runner local (VM Debian)
 
     steps:
       # 1️⃣ Récupération du code
@@ -24,37 +24,21 @@ jobs:
         with:
           node-version: 18
 
-      # 3️⃣ Installer les dépendances
+      # 3️⃣ Installer les dépendances globales (workspaces client + server)
       - name: Install dependencies
-        run: |
-          npm install
-          npm install --prefix server
+        run: npm install
 
-      # 4️⃣ Build frontend
+      # 4️⃣ Build frontend (React/Vite)
       - name: Build frontend
         run: npm run build
 
-      # 5️⃣ Démarrer ssh-agent et charger la clé privée
-      - name: Start ssh-agent
-        uses: webfactory/ssh-agent@v0.7.0
-        with:
-          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
-
-      # 6️⃣ Ajouter l’hôte distant dans known_hosts (⚠️ adapte <PORT>)
-      - name: Add known hosts
-        run: ssh-keyscan -p 14104 -H 217.182.66.173 >> ~/.ssh/known_hosts || true
-
-      # 7️⃣ Tester la connexion SSH (⚠️ adapte <PORT> et utilisateur)
-      - name: Test SSH connection
-        run: ssh -p 14104 debian@217.182.66.173 "echo ✅ Connexion SSH OK"
-
-      # 8️⃣ Installer Ansible sur le runner (pas sur le VPS)
+      # 5️⃣ Installer Ansible sur le runner (VM Debian)
       - name: Install Ansible
         run: |
           sudo apt-get update
           sudo apt-get install -y ansible rsync
 
-      # 9️⃣ Déployer avec Ansible
+      # 6️⃣ Déployer avec Ansible (sur la même VM)
       - name: Deploy with Ansible
         run: |
           ansible-playbook -i ansible/inventory.ini ansible/deploy.yml \

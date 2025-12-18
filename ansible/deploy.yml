@@ -1,5 +1,5 @@
 ---
-- name: Déploiement fullstack monorepo
+- name: Déploiement backend monorepo
   hosts: prod
   become: yes
   vars:
@@ -38,6 +38,13 @@
       args:
         chdir: /var/www/devops/server/
 
-    - name: Redémarrer le backend avec PM2
-      command: pm2 restart projetdevops
+    - name: Installer PM2 globalement (si pas déjà fait)
+      npm:
+        name: pm2
+        global: yes
+
+    - name: Démarrer ou redémarrer le backend avec PM2
+      command: pm2 start server.js --name projetdevops
+      args:
+        chdir: /var/www/devops/server/
       ignore_errors: yes
