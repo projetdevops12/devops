@@ -44,7 +44,7 @@
         global: yes
 
     - name: Démarrer ou redémarrer le backend avec PM2
-      command: pm2 start server.js --name projetdevops
+      command: pm2 start index.js --name projetdevops
       args:
         chdir: /var/www/devops/server/
       ignore_errors: yes
