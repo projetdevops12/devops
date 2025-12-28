@@ -1,31 +1,26 @@
+// src/App.jsx
 import React from "react";
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
-import { Header } from "./components/Header.jsx";
-import { Counter } from "./components/Counter.jsx";
-import { Footer } from "./components/Footer.jsx";
-import { About } from "./pages/About.jsx";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { StationProvider } from "./context/StationProvider.jsx";
+import { MachineProvider } from "./context/MachineProvider.jsx";
+import { StationDetailsProvider } from "./context/StationDetailsProvider.jsx";
+import { Home } from "./pages/Home.jsx";
+import "./index.css";
+
 
 function App() {
     return (
-        <Router>
-            <Header />
-            <nav className="navbar">
-                <Link to="/">Accueil</Link>
-                <Link to="/about">À propos</Link>
-                <Link to="/">Infos</Link>
-                <Link to="/about">Contact</Link>
-                <Link to="/about">Présentation</Link>
-                <Link to="/about">Test</Link>
-                <Link to="/about">Test2</Link>
-                <Link to="/about">Test3</Link>
-                <Link to="/about">Test4</Link>
-            </nav>
-            <Routes>
-                <Route path="/" element={<Counter />} />
-                <Route path="/about" element={<About />} />
-            </Routes>
-            <Footer />
-        </Router>
+        <StationProvider>
+            <MachineProvider>
+                <StationDetailsProvider>
+                    <Router>
+                        <Routes>
+                            <Route path="/" element={<Home />} />
+                        </Routes>
+                    </Router>
+                </StationDetailsProvider>
+            </MachineProvider>
+        </StationProvider>
     );
 }
 

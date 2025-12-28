@@ -1,55 +1,202 @@
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background-color: #f9f9f9;
+@media (prefers-color-scheme: dark) {
+    body {
+        background-color: #121212;
+        color: #eaeaea;
+    }
+
+    .card {
+        background-color: #1e1e1e;
+        color: #eaeaea;
+    }
+
+    .card-footer {
+        background-color: #1e1e1e;
+    }
 }
 
-header {
-  background: #282c34;
-  padding: 1rem;
-  color: white;
-  text-align: center;
+/* Fond global */
+body, html, #root {
+    height: 100%;
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+    background-color: #f0f2f5; /* gris clair */
 }
 
-.navbar {
-  display: flex;
-  gap: 1rem;
-  background: #444;
-  padding: 0.5rem;
+/* Liste des stations en pile */
+.station-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1rem;
 }
 
-.navbar a {
-  color: white;
-  text-decoration: none;
+/* Carte individuelle */
+.station-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #1e1e2f; /* sombre */
+    color: #ffffff;
+    padding: 0.75rem 1rem;
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+    cursor: pointer;
 }
 
-.navbar a:hover {
-  text-decoration: underline;
+/* Animation au survol */
+.station-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.25);
+    background-color: #2a2a44;
 }
 
-.page {
-  padding: 2rem;
+/* Nom de la station */
+.station-name {
+    font-weight: 600;
+    font-size: 1rem;
 }
 
-html, body, #root {
-  height: 100%;
-  margin: 0;
+/* Bouton moderne */
+.station-btn {
+    border-radius: 25px;
+    padding: 0.35rem 1rem;
+    background-color: #0dcaf0;
+    border: none;
+    color: #1e1e2f;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
 }
 
-.app-container {
-  display: flex;
-  flex-direction: column;
-  min-height: 100%;
+.station-btn:hover {
+    background-color: #0bb5d8;
+    transform: scale(1.05);
 }
 
-.content {
-  flex: 1; /* prend tout l’espace disponible */
-  padding: 2rem;
+/* Texte de chargement */
+.loading-text {
+    text-align: center;
+    color: #6c757d;
+    margin-top: 1rem;
+    font-size: 1rem;
+    font-weight: 500;
 }
 
-.footer {
-  background: #eee;
-  padding: 1rem;
-  text-align: center;
-  margin-top: auto; /* pousse le footer en bas */
+/* Style ultra lisible pour le panneau de détails */
+.station-details-panel,
+.station-details-panel * {
+    color: #4dd0ff !important; /* bleu clair très lisible */
 }
+
+/* Titre principal */
+.station-details-panel h2 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+/* Sous-titres */
+.station-details-panel h3 {
+    font-size: 1.4rem;
+    font-weight: 600;
+    margin-top: 1.5rem;
+}
+
+/* Liste des articles */
+.station-details-panel ul {
+    list-style: none;
+    padding-left: 0;
+    margin-top: 1rem;
+}
+
+.station-details-panel li {
+    font-size: 1.1rem;
+    padding: 0.4rem 0;
+    border-bottom: 1px solid rgba(77, 208, 255, 0.3);
+}
+
+/* Amélioration du contraste du panneau */
+.station-details-panel {
+    background-color: #1a1a2e; /* bleu nuit profond */
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+}
+
+/* --- STYLE DU PANNEAU DE DETAILS (OPTION 1) --- */
+
+.station-details-panel,
+.station-details-panel * {
+    color: #4dd0ff !important; /* bleu clair très lisible */
+}
+
+.station-details-panel {
+    background-color: #1a1a2e; /* bleu nuit profond */
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+}
+
+.station-details-panel h2 {
+    font-size: 1.8rem;
+    font-weight: 700;
+}
+
+.station-details-panel h3 {
+    font-size: 1.4rem;
+    font-weight: 600;
+    margin-top: 1.5rem;
+}
+
+.station-details-panel ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.station-details-panel li {
+    font-size: 1.1rem;
+    padding: 0.4rem 0;
+    border-bottom: 1px solid rgba(77, 208, 255, 0.3);
+}
+
+/* Panneau bleu néon */
+.station-details-panel,
+.station-details-panel * {
+    color: #4dd0ff !important;
+}
+
+.station-details-panel {
+    background-color: #1a1a2e;
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+}
+
+/* KPIs */
+.kpi-container {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.kpi-card {
+    flex: 1;
+    background-color: #0f0f1a;
+    padding: 1rem;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.kpi-card h4 {
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+    opacity: 0.8;
+}
+
+.kpi-card p {
+    font-size: 1.6rem;
+    font-weight: bold;
+}
+
