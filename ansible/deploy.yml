@@ -1,50 +1,68 @@
 ---
-- name: Déploiement backend monorepo
+- name: Déploiement monorepo DevOps
   hosts: prod
   become: yes
+
   vars:
-    repo_src: "{{ repo_src | default(github_workspace) }}"
+    app_dir: /var/www/devops
 
   tasks:
 
-    - name: Nettoyer l'ancien projet
+    # ========================
+    # NETTOYAGE
+    # ========================
+    - name: Supprimer l'ancien projet
       file:
-        path: /var/www/devops/
+        path: "{{ app_dir }}"
         state: absent
 
-    - name: Recréer le dossier projet
+    - name: Créer le dossier projet
       file:
-        path: /var/www/devops/
+        path: "{{ app_dir }}"
         state: directory
         owner: www-data
         group: www-data
         mode: '0755'
 
-    - name: Synchroniser le repo (sans fichiers lourds)
+    # ========================
+    # SYNCHRONISATION
+    # ========================
+    - name: Synchroniser le repo
       synchronize:
-        src: "{{ repo_src }}/"
-        dest: /var/www/devops/
+        src: "{{ repo_src | default(github_workspace) }}/"
+        dest: "{{ app_dir }}/"
+        recursive: yes
+        delete: yes
         rsync_opts:
           - "--exclude=node_modules"
           - "--exclude=.git"
           - "--exclude=.github"
-          - "--exclude=*.log"
-          - "--exclude=tmp"
-        recursive: yes
-        delete: yes
 
-    - name: Installer les dépendances backend
+    # ========================
+    # FRONTEND
+    # ========================
+    - name: Installer dépendances frontend
       command: npm install
       args:
-        chdir: /var/www/devops/server/
+        chdir: "{{ app_dir }}/client"
 
-    - name: Installer PM2 globalement (si pas déjà fait)
+    - name: Build frontend
+      command: npm run build
+      args:
+        chdir: "{{ app_dir }}/client"
+
+
+    - name: Installer dépendances backend
+      command: npm install
+      args:
+        chdir: "{{ app_dir }}/server"
+
+    - name: Installer PM2 globalement
       npm:
         name: pm2
         global: yes
 
-    - name: Démarrer ou redémarrer le backend avec PM2
-      command: pm2 start npm --name projetdevops -- start
+    - name: Démarrer ou redémarrer l'API avec PM2
+      command: pm2 startOrReload ecosystem.config.js
       args:
-        chdir: /var/www/devops/server/
-      ignore_errors: yes
+        chdir: "{{ app_dir }}/server"
