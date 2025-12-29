@@ -9,17 +9,6 @@
   tasks:
 
     # ========================
-    # INSTALLATION NODE 20+
-    # ========================
-    - name: Installer Node.js 20+
-      shell: |
-        curl -fsSL https://deb.nodesource.com/setup_20.x | bash -
-        apt-get install -y nodejs
-
-    - name: Vérifier Node.js installé
-      command: node -v
-
-    # ========================
     # CLEAN
     # ========================
     - name: Supprimer l'ancien projet
@@ -81,6 +70,6 @@
         global: yes
 
     - name: Démarrer ou redémarrer l'API avec PM2
-      command: pm2 startOrReload ecosystem.config.js
+      command: pm2 startOrReload ecosystem.config.cjs
       args:
         chdir: "{{ app_dir }}/server"
