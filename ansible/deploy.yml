@@ -9,7 +9,24 @@
   tasks:
 
     # ========================
-    # NETTOYAGE
+    # INSTALLATION NODE 20+
+    # ========================
+    - name: Vérifier la version de Node.js
+      command: node -v
+      register: node_version
+      ignore_errors: yes
+
+    - name: Installer Node.js 20 si version trop vieille
+      shell: |
+        curl -fsSL https://deb.nodesource.com/setup_20.x | bash -
+        apt-get install -y nodejs
+      when: node_version.stdout is not defined or node_version.stdout is version('20', '<')
+
+    - name: Vérifier Node.js après installation
+      command: node -v
+
+    # ========================
+    # CLEAN
     # ========================
     - name: Supprimer l'ancien projet
       file:
@@ -46,12 +63,19 @@
       args:
         chdir: "{{ app_dir }}/client"
 
+    - name: Installer react-chartjs-2 et chart.js si manquant
+      command: npm install react-chartjs-2 chart.js
+      args:
+        chdir: "{{ app_dir }}/client"
+
     - name: Build frontend
       command: npm run build
       args:
         chdir: "{{ app_dir }}/client"
 
-
+    # ========================
+    # BACKEND
+    # ========================
     - name: Installer dépendances backend
       command: npm install
       args:
