@@ -6,6 +6,7 @@ import { fileURLToPath } from "url";
 import stationRoutes from "./routes/station.routes.js";
 import machineRoutes from "./routes/machine.routes.js";
 import stationDetailsRoutes from "./routes/stationDetails.routes.js";
+import errorSchaeferRoutes from "./routes/errorSchaefer.routes.js";
 
 const app = express();
 
@@ -16,6 +17,7 @@ app.use(express.json());
 app.use("/api/stations", stationRoutes);
 app.use("/api/machines", machineRoutes);
 app.use("/api/station-details", stationDetailsRoutes);
+app.use("/api/errors-schaefer", errorSchaeferRoutes);
 
 // __dirname ES module
 const __filename = fileURLToPath(import.meta.url);
@@ -23,10 +25,10 @@ const __dirname = path.dirname(__filename);
 
 // Frontend en production
 if (process.env.NODE_ENV === "production") {
-    app.use(express.static(path.join(__dirname, "../client/dist")));
+    app.use(express.static(path.join(__dirname, "../../client/dist")));
 
     app.get("*", (req, res) => {
-        res.sendFile(path.join(__dirname, "../client/dist/index.html"));
+        res.sendFile(path.join(__dirname, "../../client/dist/index.html"));
     });
 }
 

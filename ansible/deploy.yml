@@ -7,10 +7,6 @@
     app_dir: /var/www/devops
 
   tasks:
-
-    # ========================
-    # CLEAN
-    # ========================
     - name: Supprimer l'ancien projet
       file:
         path: "{{ app_dir }}"
@@ -24,9 +20,6 @@
         group: www-data
         mode: '0755'
 
-    # ========================
-    # SYNCHRONISATION
-    # ========================
     - name: Synchroniser le repo
       synchronize:
         src: "{{ repo_src | default(github_workspace) }}/"
@@ -38,9 +31,6 @@
           - "--exclude=.git"
           - "--exclude=.github"
 
-    # ========================
-    # FRONTEND
-    # ========================
     - name: Installer dépendances frontend
       command: npm install
       args:
@@ -56,9 +46,6 @@
       args:
         chdir: "{{ app_dir }}/client"
 
-    # ========================
-    # BACKEND
-    # ========================
     - name: Installer dépendances backend
       command: npm install
       args:

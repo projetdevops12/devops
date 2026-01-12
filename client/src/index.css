@@ -200,3 +200,183 @@ body, html, #root {
     font-weight: bold;
 }
 
+.table-dark {
+    background-color: #0f1b2b !important;
+}
+
+.table-dark td, .table-dark th {
+    border-color: #1f2d3d !important;
+}
+
+.table-dark tbody tr:hover {
+    background-color: #1a2a3d !important;
+}
+
+/* --- STYLE POUR LE BOUTON ERROR (même style que station-card) --- */
+
+.error-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #1e1e2f;
+    color: #ffffff;
+    padding: 0.75rem 1rem;
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+    cursor: pointer;
+}
+
+.error-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.25);
+    background-color: #2a2a44;
+}
+
+.error-name {
+    font-weight: 600;
+    font-size: 1rem;
+    color: #ff6b6b; /* rouge clair pour signaler une erreur */
+}
+
+/* Bouton "Voir" dans la carte ERROR */
+.error-btn {
+    border-radius: 25px;
+    padding: 0.35rem 1rem;
+    background-color: #ff6b6b;
+    border: none;
+    color: #1e1e2f;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+}
+
+.error-btn:hover {
+    background-color: #ff8787;
+    transform: scale(1.05);
+}
+
+/* Bouton retour dans le panneau */
+.back-btn {
+    border-radius: 25px;
+    padding: 0.35rem 1rem;
+    background-color: #0dcaf0;
+    border: none;
+    color: #1e1e2f;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+    margin-bottom: 1rem;
+}
+
+.back-btn:hover {
+    background-color: #0bb5d8;
+    transform: scale(1.05);
+}
+
+
+/* --- STYLE POUR LE BOUTON ERROR (même style que station-card) --- */
+
+.error-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #1e1e2f;
+    color: #ffffff;
+    padding: 0.75rem 1rem;
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+    cursor: pointer;
+}
+
+.error-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.25);
+    background-color: #2a2a44;
+}
+
+.error-name {
+    font-weight: 600;
+    font-size: 1rem;
+    color: #4dd0ff; /* rouge clair pour signaler une erreur */
+}
+
+/* Bouton "Voir" dans la carte ERROR */
+.error-btn {
+    border-radius: 25px;
+    padding: 0.35rem 1rem;
+    background-color: #4dd0ff;
+    border: none;
+    color: #1e1e2f;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+}
+
+.error-btn:hover {
+    background-color: #4dd0ff;
+    transform: scale(1.05);
+}
+
+/* --- TABLEAU MODERNE BLEU NÉON --- */
+
+.error-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: rgba(15, 27, 43, 0.6);
+    backdrop-filter: blur(8px);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+}
+
+.error-table thead {
+    background: rgba(77, 208, 255, 0.15);
+}
+
+.error-table th {
+    padding: 12px;
+    text-align: left;
+    font-weight: 700;
+    color: #4dd0ff;
+    font-size: 0.95rem;
+    border-bottom: 1px solid rgba(77, 208, 255, 0.3);
+}
+
+.error-table td {
+    padding: 10px 12px;
+    font-size: 0.9rem;
+    color: #d6f3ff;
+    border-bottom: 1px solid rgba(77, 208, 255, 0.1);
+}
+
+.error-table tbody tr:hover {
+    background: rgba(77, 208, 255, 0.08);
+    transition: 0.2s ease;
+}
+
+.back-btn-round {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #4dd0ff, #1e90ff);
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #0f1b2b;
+    font-size: 1.2rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    box-shadow: 0 4px 12px rgba(77, 208, 255, 0.4);
+    margin-bottom: 1.2rem;
+}
+
+.back-btn-round:hover {
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 6px 18px rgba(77, 208, 255, 0.6);
+    background: linear-gradient(135deg, #76e2ff, #4dd0ff);
+}
+

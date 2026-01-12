@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { StationProvider } from "./context/StationProvider.jsx";
 import { MachineProvider } from "./context/MachineProvider.jsx";
 import { StationDetailsProvider } from "./context/StationDetailsProvider.jsx";
+import { ErrorSchaeferProvider } from "./context/ErrorSchaeferProvider.jsx";
 import { Home } from "./pages/Home.jsx";
 import "./index.css";
 
@@ -13,11 +14,13 @@ function App() {
         <StationProvider>
             <MachineProvider>
                 <StationDetailsProvider>
-                    <Router>
-                        <Routes>
-                            <Route path="/" element={<Home />} />
-                        </Routes>
-                    </Router>
+                    <ErrorSchaeferProvider>
+                        <Router>
+                           <Routes>
+                              <Route path="/" element={<Home />} />
+                           </Routes>
+                        </Router>
+                    </ErrorSchaeferProvider>
                 </StationDetailsProvider>
             </MachineProvider>
         </StationProvider>

@@ -24,7 +24,7 @@ export async function getStationDetails(id_station) {
             FROM t_induct
             WHERE id_workstation = $1
             ORDER BY date DESC, hour DESC
-            LIMIT 1400
+            LIMIT 3300
         `;
     } else {
         // unloading → sortants
@@ -33,7 +33,7 @@ export async function getStationDetails(id_station) {
             FROM t_packout_station
             WHERE id_workstation = $1
             ORDER BY date DESC, hour DESC
-            LIMIT 1400
+            LIMIT 3300
         `;
     }
 
