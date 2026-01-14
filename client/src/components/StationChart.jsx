@@ -12,16 +12,16 @@ import {
 
 ChartJS.register(LineElement, CategoryScale, LinearScale, PointElement, Tooltip, Legend);
 
-export function StationChart({ articles }) {
-    const countsByHour = {};
+export function StationChart({ hourly, moyenne }) {
 
-    articles.forEach(a => {
-        const hour = a.hour?.substring(0, 2) || "00";
-        countsByHour[hour] = (countsByHour[hour] || 0) + 1;
+    const labels = Array.from({ length: 24 }, (_, i) =>
+        i.toString().padStart(2, "0")
+    );
+
+    const values = labels.map(h => {
+        const found = hourly.find(x => x.hour === h);
+        return found ? Number(found.total) : 0;
     });
-
-    const labels = Object.keys(countsByHour);
-    const values = Object.values(countsByHour);
 
     const data = {
         labels,
@@ -35,6 +35,14 @@ export function StationChart({ articles }) {
                 borderWidth: 2,
                 pointRadius: 4,
                 pointBackgroundColor: "#4dd0ff"
+            },
+            {
+                label: "Moyenne journalière",
+                data: Array(24).fill(moyenne),
+                borderColor: "#ffcc00",
+                borderDash: [5, 5],
+                borderWidth: 2,
+                pointRadius: 0
             }
         ]
     };

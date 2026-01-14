@@ -1,4 +1,3 @@
-// src/components/MachineList.jsx
 import React from "react";
 import { useMachine } from "../hooks/useMachine.js";
 
@@ -15,8 +14,9 @@ export function MachineList() {
     }
 
     return (
-        <div>
-            <p>{machine.name}</p>
-        </div>
+        <span className="machine-badge">
+              {machine[0].name}
+        </span>
+
     );
 }

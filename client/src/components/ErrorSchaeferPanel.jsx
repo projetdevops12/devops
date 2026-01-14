@@ -6,7 +6,8 @@ export function ErrorSchaeferPanel({ onBack }) {
 
     useEffect(() => {
         fetchErrorsSchaefer().then(data => {
-            setErrors(data.errors || []);
+            console.log("FRONT RECEIVED:", data);
+            setErrors(Array.isArray(data.errors) ? data.errors : []);
         });
     }, []);
 

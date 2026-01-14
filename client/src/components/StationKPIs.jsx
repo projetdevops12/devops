@@ -1,23 +1,15 @@
 import React from "react";
 
-export function StationKPIs({ articles }) {
-    if (!articles || articles.length === 0) {
+export function StationKPIs({ hourly, moyenne }) {
+    if (!hourly || hourly.length === 0) {
         return <p>Aucune donnée disponible</p>;
     }
 
-    // Regrouper par heure
-    const countsByHour = {};
-    articles.forEach(a => {
-        const hour = a.hour?.substring(0, 2) || "00";
-        countsByHour[hour] = (countsByHour[hour] || 0) + 1;
-    });
+    const total = hourly.reduce((sum, h) => sum + Number(h.total), 0);
 
-    const hours = Object.keys(countsByHour);
-    const values = Object.values(countsByHour);
-
-    const total = articles.length;
-    const maxHour = hours[values.indexOf(Math.max(...values))];
-    const avg = Math.round(total / hours.length);
+    const maxEntry = hourly.reduce((max, h) =>
+        Number(h.total) > Number(max.total) ? h : max
+    );
 
     return (
         <div className="kpi-container">
@@ -28,12 +20,12 @@ export function StationKPIs({ articles }) {
 
             <div className="kpi-card">
                 <h4>Heure la plus active</h4>
-                <p>{maxHour}h</p>
+                <p>{maxEntry.hour}h</p>
             </div>
 
             <div className="kpi-card">
                 <h4>Moyenne / heure</h4>
-                <p>{avg}</p>
+                <p>{Math.round(moyenne)}</p>
             </div>
         </div>
     );

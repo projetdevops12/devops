@@ -380,3 +380,13 @@ body, html, #root {
     background: linear-gradient(135deg, #76e2ff, #4dd0ff);
 }
 
+
+.machine-badge {
+    display: inline-block;
+    padding: 6px 14px;
+    background-color: #4dd0ff;
+    color: #001f2b;
+    border-radius: 8px;
+    font-weight: bold;
+    font-size: 1rem;
+}

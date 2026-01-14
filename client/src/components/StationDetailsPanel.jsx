@@ -1,3 +1,4 @@
+// src/components/StationDetailsPanel.jsx
 import React from "react";
 import { useStationDetails } from "../hooks/useStationDetails.js";
 import { StationChart } from "./StationChart.jsx";
@@ -9,12 +10,12 @@ export function StationDetailsPanel() {
     if (!details || !details.station) {
         return (
             <div className="d-flex justify-content-center align-items-center h-100">
-                <h2>Bonjour</h2>
+                <h2>Data</h2>
             </div>
         );
     }
 
-    const { station, articles } = details;
+    const { station, hourly, moyenne } = details;
 
     return (
         <div className="p-4 station-details-panel">
@@ -22,13 +23,37 @@ export function StationDetailsPanel() {
             <p>Type : {station.type_name}</p>
             <p>Target : {station.target}</p>
 
-            {/* KPIs */}
             <h3 className="mt-4">Indicateurs clés</h3>
-            <StationKPIs articles={articles} />
+            <StationKPIs hourly={hourly} moyenne={moyenne} />
 
-            {/* Graphique */}
             <h3 className="mt-4">Activité (articles par heure)</h3>
-            <StationChart articles={articles} />
+            <StationChart hourly={hourly} moyenne={moyenne} />
+
+            {/* TABLEAU TOTAL PAR HEURE (filtré) */}
+            <h3 className="mt-4">Total des articles par heure</h3>
+
+            <div className="table-responsive">
+                <table className="error-table">
+                    <thead>
+                    <tr>
+                        <th>Heure</th>
+                        <th>Total articles</th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                    {hourly
+                        .filter(h => h.total > 0)   // <-- FILTRE ICI
+                        .map(h => (
+                            <tr key={h.hour}>
+                                <td>{h.hour}h</td>
+                                <td>{h.total}</td>
+                            </tr>
+                        ))
+                    }
+                    </tbody>
+                </table>
+            </div>
         </div>
     );
 }
