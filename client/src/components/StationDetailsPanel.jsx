@@ -10,7 +10,7 @@ export function StationDetailsPanel() {
     if (!details || !details.station) {
         return (
             <div className="d-flex justify-content-center align-items-center h-100">
-                <h2>Data</h2>
+                <h2>Données</h2>
             </div>
         );
     }

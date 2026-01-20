@@ -21,7 +21,7 @@ export function StationList() {
                         className="station-btn"
                         onClick={() => loadStationDetails(station.id_station)}
                     >
-                        Visualisé
+                        Visualiser
                     </button>
                 </div>
             ))}
