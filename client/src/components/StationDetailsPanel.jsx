@@ -10,7 +10,7 @@ export function StationDetailsPanel() {
     if (!details || !details.station) {
         return (
             <div className="d-flex justify-content-center align-items-center h-100">
-                <h2>Données</h2>
+                <h2> </h2>
             </div>
         );
     }
@@ -46,7 +46,7 @@ export function StationDetailsPanel() {
                         .filter(h => h.total > 0)   // <-- FILTRE ICI
                         .map(h => (
                             <tr key={h.hour}>
-                                <td>{h.hour}h</td>
+                                <td>{Number(h.hour)- 1 }h - {Number(h.hour)}h</td>
                                 <td>{h.total}</td>
                             </tr>
                         ))

@@ -3,14 +3,20 @@ import React from "react";
 import { useStations } from "../hooks/useStations.js";
 import { useStationDetails } from "../hooks/useStationDetails.js";
 
-export function StationList() {
+export function StationList({ machineId }) {
     const { stations } = useStations();
     const { loadStationDetails } = useStationDetails();
+
+    // Rien sélectionné → on ne montre pas les stations
+    if (!machineId) {
+        return <p className="loading-text">Sélectionnez une machine</p>;
+    }
 
     if (!stations.length) {
         return <p className="loading-text">Chargement...</p>;
     }
 
+    // Pas de filtrage → on affiche toutes les stations
     return (
         <div className="station-list">
             {stations.map((station) => (

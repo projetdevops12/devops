@@ -1,7 +1,8 @@
+// src/components/MachineList.jsx
 import React from "react";
 import { useMachine } from "../hooks/useMachine.js";
 
-export function MachineList() {
+export function MachineList({ selectedMachine, onSelectMachine }) {
     const { machine } = useMachine();
 
     if (!machine) {
@@ -14,9 +15,20 @@ export function MachineList() {
     }
 
     return (
-        <span className="machine-badge">
-              {machine[0].name}
-        </span>
+        <div className="text-center mb-4">
+            <select
+                className="form-select w-auto d-inline-block machine-select"
+                value={selectedMachine || ""}
+                onChange={(e) => onSelectMachine(e.target.value)}
+            >
+                <option value="">Sélectionnez une machine</option>
 
+                {machine.map((m) => (
+                    <option key={m.id_machine} value={m.id_machine}>
+                        {m.name}
+                    </option>
+                ))}
+            </select>
+        </div>
     );
 }

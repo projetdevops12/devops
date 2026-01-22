@@ -1,28 +1,19 @@
-@media (prefers-color-scheme: dark) {
-    body {
-        background-color: #121212;
-        color: #eaeaea;
-    }
+/* ---------------------------------------------------
+   GLOBAL
+--------------------------------------------------- */
 
-    .card {
-        background-color: #1e1e1e;
-        color: #eaeaea;
-    }
-
-    .card-footer {
-        background-color: #1e1e1e;
-    }
-}
-
-/* Fond global */
 body, html, #root {
     height: 100%;
     margin: 0;
     font-family: 'Inter', sans-serif;
     background-color: #f0f2f5; /* gris clair */
+    color: #1e1e2f;
 }
 
-/* Liste des stations en pile */
+/* ---------------------------------------------------
+   LISTE DES STATIONS
+--------------------------------------------------- */
+
 .station-list {
     display: flex;
     flex-direction: column;
@@ -30,12 +21,12 @@ body, html, #root {
     padding: 1rem;
 }
 
-/* Carte individuelle */
+/* Carte station */
 .station-card {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background-color: #1e1e2f; /* sombre */
+    background-color: #6E93BE; /* Couleur de base */
     color: #ffffff;
     padding: 0.75rem 1rem;
     border-radius: 15px;
@@ -44,20 +35,23 @@ body, html, #root {
     cursor: pointer;
 }
 
-/* Animation au survol */
 .station-card:hover {
     transform: translateY(-5px);
     box-shadow: 0 12px 25px rgba(0, 0, 0, 0.25);
-    background-color: #2a2a44;
+    background-color: #4F6F94; /* Version foncée harmonisée */
 }
 
-/* Nom de la station */
+.station-card:active {
+    transform: translateY(-2px);
+    background-color: #3A536E;
+}
+
 .station-name {
     font-weight: 600;
     font-size: 1rem;
 }
 
-/* Bouton moderne */
+/* Bouton station */
 .station-btn {
     border-radius: 25px;
     padding: 0.35rem 1rem;
@@ -74,36 +68,30 @@ body, html, #root {
     transform: scale(1.05);
 }
 
-/* Texte de chargement */
-.loading-text {
-    text-align: center;
-    color: #6c757d;
-    margin-top: 1rem;
-    font-size: 1rem;
-    font-weight: 500;
+/* ---------------------------------------------------
+   PANNEAU DE DÉTAILS — THÈME CLAIR
+--------------------------------------------------- */
+
+.station-details-panel {
+    background-color: #ffffff;
+    color: #1e1e2f;
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
 }
 
-/* Style ultra lisible pour le panneau de détails */
-.station-details-panel,
-.station-details-panel * {
-    color: #4dd0ff !important; /* bleu clair très lisible */
-}
-
-/* Titre principal */
 .station-details-panel h2 {
     font-size: 1.8rem;
     font-weight: 700;
     margin-bottom: 0.5rem;
 }
 
-/* Sous-titres */
 .station-details-panel h3 {
     font-size: 1.4rem;
     font-weight: 600;
     margin-top: 1.5rem;
 }
 
-/* Liste des articles */
 .station-details-panel ul {
     list-style: none;
     padding-left: 0;
@@ -113,67 +101,13 @@ body, html, #root {
 .station-details-panel li {
     font-size: 1.1rem;
     padding: 0.4rem 0;
-    border-bottom: 1px solid rgba(77, 208, 255, 0.3);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
 
-/* Amélioration du contraste du panneau */
-.station-details-panel {
-    background-color: #1a1a2e; /* bleu nuit profond */
-    border-radius: 12px;
-    padding: 1.5rem;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
-}
+/* ---------------------------------------------------
+   KPIs
+--------------------------------------------------- */
 
-/* --- STYLE DU PANNEAU DE DETAILS (OPTION 1) --- */
-
-.station-details-panel,
-.station-details-panel * {
-    color: #4dd0ff !important; /* bleu clair très lisible */
-}
-
-.station-details-panel {
-    background-color: #1a1a2e; /* bleu nuit profond */
-    border-radius: 12px;
-    padding: 1.5rem;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
-}
-
-.station-details-panel h2 {
-    font-size: 1.8rem;
-    font-weight: 700;
-}
-
-.station-details-panel h3 {
-    font-size: 1.4rem;
-    font-weight: 600;
-    margin-top: 1.5rem;
-}
-
-.station-details-panel ul {
-    list-style: none;
-    padding-left: 0;
-}
-
-.station-details-panel li {
-    font-size: 1.1rem;
-    padding: 0.4rem 0;
-    border-bottom: 1px solid rgba(77, 208, 255, 0.3);
-}
-
-/* Panneau bleu néon */
-.station-details-panel,
-.station-details-panel * {
-    color: #4dd0ff !important;
-}
-
-.station-details-panel {
-    background-color: #1a1a2e;
-    border-radius: 12px;
-    padding: 1.5rem;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
-}
-
-/* KPIs */
 .kpi-container {
     display: flex;
     gap: 1rem;
@@ -182,11 +116,12 @@ body, html, #root {
 
 .kpi-card {
     flex: 1;
-    background-color: #0f0f1a;
+    background-color: #f7f9fc;
+    color: #1e1e2f;
     padding: 1rem;
     border-radius: 10px;
     text-align: center;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
 .kpi-card h4 {
@@ -200,63 +135,136 @@ body, html, #root {
     font-weight: bold;
 }
 
-.table-dark {
-    background-color: #0f1b2b !important;
+/* ---------------------------------------------------
+   TABLEAU CLAIR
+--------------------------------------------------- */
+/* --- TABLEAU PREMIUM --- */
+
+/* --- TABLEAU ULTRA CLAIR & MODERNE --- */
+
+.error-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    background: #ffffff;
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.06);
+    font-family: "Inter", sans-serif;
 }
 
-.table-dark td, .table-dark th {
-    border-color: #1f2d3d !important;
+/* En-tête très clair */
+.error-table thead {
+    background: #f7faff;
+    border-bottom: 1px solid #e5e7eb;
 }
 
-.table-dark tbody tr:hover {
-    background-color: #1a2a3d !important;
-}
-
-/* --- STYLE POUR LE BOUTON ERROR (même style que station-card) --- */
-
-.error-card {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background-color: #1e1e2f;
-    color: #ffffff;
-    padding: 0.75rem 1rem;
-    border-radius: 15px;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
-    cursor: pointer;
-}
-
-.error-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.25);
-    background-color: #2a2a44;
-}
-
-.error-name {
+.error-table th {
+    padding: 14px 16px;
+    text-align: left;
     font-weight: 600;
-    font-size: 1rem;
-    color: #ff6b6b; /* rouge clair pour signaler une erreur */
+    color: #1f2937;
+    font-size: 0.95rem;
+    letter-spacing: 0.2px;
 }
 
-/* Bouton "Voir" dans la carte ERROR */
-.error-btn {
-    border-radius: 25px;
-    padding: 0.35rem 1rem;
-    background-color: #ff6b6b;
-    border: none;
-    color: #1e1e2f;
-    font-weight: 600;
+/* Cellules */
+.error-table td {
+    padding: 12px 16px;
     font-size: 0.9rem;
-    transition: all 0.3s ease;
+    color: #374151;
+    background: #ffffff;
+    border-bottom: 1px solid #f1f1f1;
 }
 
-.error-btn:hover {
-    background-color: #ff8787;
-    transform: scale(1.05);
+/* Dernière ligne sans bordure */
+.error-table tbody tr:last-child td {
+    border-bottom: none;
 }
 
-/* Bouton retour dans le panneau */
+/* Hover très doux */
+.error-table tbody tr:hover {
+    background: #f9fbff;
+    transition: background 0.25s ease;
+}
+
+/* Badge code erreur — version claire */
+.error-code-badge {
+    background: #2563eb;
+    color: white;
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 0.8rem;
+    display: inline-block;
+}
+
+/* Description en bleu pastel */
+.error-table .text-info {
+    color: #0284c7 !important;
+    font-weight: 500;
+}
+
+/* --- TABLEAU DE STATISTIQUES --- */
+
+.stats-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    background: #ffffff;
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.06);
+    margin-bottom: 25px;
+}
+
+.stats-table th {
+    background: #f3f4f6;
+    padding: 12px;
+    font-weight: 600;
+    color: #1f2937;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.stats-table td {
+    padding: 12px;
+    color: #374151;
+    border-bottom: 1px solid #f1f1f1;
+}
+
+.stats-table tr:last-child td {
+    border-bottom: none;
+}
+
+/* --- FILTRES CLAIRS --- */
+
+.filters input {
+    background: #ffffff;
+    border: 2px solid #e5e7eb;
+    padding: 10px;
+    border-radius: 8px;
+    color: #374151;
+}
+
+.filters input::placeholder {
+    color: #9ca3af;
+}
+
+.filters input:focus {
+    border-color: #2563eb;
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+}
+
+.table-scroll {
+    max-height: 500px;
+    overflow-y: auto;
+    border-radius: 14px;
+}
+/* ---------------------------------------------------
+   BOUTONS
+--------------------------------------------------- */
+
 .back-btn {
     border-radius: 25px;
     padding: 0.35rem 1rem;
@@ -274,88 +282,6 @@ body, html, #root {
     transform: scale(1.05);
 }
 
-
-/* --- STYLE POUR LE BOUTON ERROR (même style que station-card) --- */
-
-.error-card {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background-color: #1e1e2f;
-    color: #ffffff;
-    padding: 0.75rem 1rem;
-    border-radius: 15px;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
-    cursor: pointer;
-}
-
-.error-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.25);
-    background-color: #2a2a44;
-}
-
-.error-name {
-    font-weight: 600;
-    font-size: 1rem;
-    color: #4dd0ff; /* rouge clair pour signaler une erreur */
-}
-
-/* Bouton "Voir" dans la carte ERROR */
-.error-btn {
-    border-radius: 25px;
-    padding: 0.35rem 1rem;
-    background-color: #4dd0ff;
-    border: none;
-    color: #1e1e2f;
-    font-weight: 600;
-    font-size: 0.9rem;
-    transition: all 0.3s ease;
-}
-
-.error-btn:hover {
-    background-color: #4dd0ff;
-    transform: scale(1.05);
-}
-
-/* --- TABLEAU MODERNE BLEU NÉON --- */
-
-.error-table {
-    width: 100%;
-    border-collapse: collapse;
-    background: rgba(15, 27, 43, 0.6);
-    backdrop-filter: blur(8px);
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
-}
-
-.error-table thead {
-    background: rgba(77, 208, 255, 0.15);
-}
-
-.error-table th {
-    padding: 12px;
-    text-align: left;
-    font-weight: 700;
-    color: #4dd0ff;
-    font-size: 0.95rem;
-    border-bottom: 1px solid rgba(77, 208, 255, 0.3);
-}
-
-.error-table td {
-    padding: 10px 12px;
-    font-size: 0.9rem;
-    color: #d6f3ff;
-    border-bottom: 1px solid rgba(77, 208, 255, 0.1);
-}
-
-.error-table tbody tr:hover {
-    background: rgba(77, 208, 255, 0.08);
-    transition: 0.2s ease;
-}
-
 .back-btn-round {
     width: 42px;
     height: 42px;
@@ -365,28 +291,215 @@ body, html, #root {
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #0f1b2b;
+    color: #ffffff;
     font-size: 1.2rem;
     font-weight: bold;
     cursor: pointer;
     transition: all 0.25s ease;
-    box-shadow: 0 4px 12px rgba(77, 208, 255, 0.4);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
     margin-bottom: 1.2rem;
 }
 
 .back-btn-round:hover {
     transform: translateY(-3px) scale(1.05);
-    box-shadow: 0 6px 18px rgba(77, 208, 255, 0.6);
-    background: linear-gradient(135deg, #76e2ff, #4dd0ff);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
 }
 
+/* ---------------------------------------------------
+   ERROR CARD (STYLE CLAIR)
+--------------------------------------------------- */
+
+.error-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #ffffff;
+    color: #1e1e2f;
+    padding: 0.75rem 1rem;
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+    cursor: pointer;
+}
+
+.error-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.2);
+    background-color: #f7f9fc;
+}
+
+.error-name {
+    font-weight: 600;
+    font-size: 1rem;
+    color: #d9534f; /* rouge clair */
+}
+
+.error-btn {
+    border-radius: 25px;
+    padding: 0.35rem 1rem;
+    background-color: #ff6b6b;
+    border: none;
+    color: #ffffff;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+}
+
+.error-btn:hover {
+    background-color: #ff8787;
+    transform: scale(1.05);
+}
+
+/* ---------------------------------------------------
+   BADGE MACHINE
+--------------------------------------------------- */
 
 .machine-badge {
     display: inline-block;
-    padding: 6px 14px;
-    background-color: #4dd0ff;
-    color: #001f2b;
-    border-radius: 8px;
-    font-weight: bold;
+    padding: 8px 18px;
+    background: #4dd0ff;
+    color: #003049;
+    border-radius: 10px;
+    font-weight: 700;
     font-size: 1rem;
+    letter-spacing: 0.5px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.12);
+    transition: all 0.25s ease;
 }
+
+.machine-badge:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.18);
+    background: #5ee0ff;
+}
+
+
+
+.theme-toggle-btn {
+    background: none;
+    border: none;
+    font-size: 1.8rem;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.theme-toggle-btn:hover {
+    transform: scale(1.15);
+}
+
+
+/* Dark Mode */
+
+
+
+/* ---------------------------------------------------
+   MODE SOMBRE
+--------------------------------------------------- */
+
+.dark-mode {
+    background: linear-gradient(135deg, #0f172a, #1e293b);
+    color: #e2e8f0;
+    transition: background 0.4s ease, color 0.4s ease;
+}
+
+/* Cartes stations */
+.dark-mode .station-card {
+    background-color: #334155;
+    color: #f1f5f9;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+}
+
+.dark-mode .station-card:hover {
+    background-color: #475569;
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.55);
+}
+
+/* Bouton station */
+.dark-mode .station-btn {
+    background-color: #38bdf8;
+    color: #0f172a;
+}
+
+.dark-mode .station-btn:hover {
+    background-color: #0ea5e9;
+}
+
+/* Panneau détails */
+.dark-mode .station-details-panel {
+    background-color: #1e293b;
+    color: #e2e8f0;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+}
+
+.dark-mode .station-details-panel li {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* KPI cards */
+.dark-mode .kpi-card {
+    background-color: #1e293b;
+    color: #f1f5f9;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.45);
+}
+
+/* Tableau */
+.dark-mode .error-table {
+    background-color: #1e293b;
+    color: #e2e8f0;
+}
+
+.dark-mode .error-table thead {
+    background-color: #334155;
+}
+
+.dark-mode .error-table tbody tr:hover {
+    background-color: #475569;
+}
+
+/* Error card */
+.dark-mode .error-card {
+    background-color: #334155;
+    color: #f1f5f9;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.45);
+}
+
+.dark-mode .error-card:hover {
+    background-color: #475569;
+}
+
+/* Boutons */
+.dark-mode .back-btn {
+    background-color: #38bdf8;
+    color: #0f172a;
+}
+
+.dark-mode .back-btn:hover {
+    background-color: #0ea5e9;
+}
+
+.dark-mode .back-btn-round {
+    background: linear-gradient(135deg, #38bdf8, #0ea5e9);
+}
+
+/* Badge machine */
+.dark-mode .machine-badge {
+    background: #38bdf8;
+    color: #0f172a;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.45);
+}
+
+/* Select machine */
+.dark-mode .machine-select {
+    background-color: #1e293b;
+    color: #f1f5f9;
+    border: 1px solid #475569;
+}
+
+/* Bouton lune */
+.dark-mode .theme-toggle-btn {
+    color: #f1f5f9;
+}
+
+
+
+
